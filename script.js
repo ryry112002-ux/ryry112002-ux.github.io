@@ -1,48 +1,83 @@
+// ===== Base =====
 const root = document.documentElement;
 
 // Footer year
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Theme toggle (light default, optional dark mode)
+// ===== Theme toggle =====
 const themeBtn = document.getElementById("themeBtn");
-const savedTheme = localStorage.getItem("theme"); // "dark" or null
-if (savedTheme === "dark") root.classList.add("dark");
-updateThemeIcon();
-
-themeBtn.addEventListener("click", () => {
-  root.classList.toggle("dark");
-  localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "");
+if (themeBtn) {
+  const savedTheme = localStorage.getItem("theme"); // "dark" or ""
+  if (savedTheme === "dark") root.classList.add("dark");
   updateThemeIcon();
-});
 
-function updateThemeIcon() {
-  const isDark = root.classList.contains("dark");
-  themeBtn.textContent = isDark ? "☀" : "☾";
+  themeBtn.addEventListener("click", () => {
+    root.classList.toggle("dark");
+    localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "");
+    updateThemeIcon();
+  });
+
+  function updateThemeIcon() {
+    themeBtn.textContent = root.classList.contains("dark") ? "☀" : "☾";
+  }
 }
 
-// Copy email button
-const email = "ryry112002@mail.com"; // <-- change this
-const copyBtn = document.getElementById("copyBtn");
-const copyStatus = document.getElementById("copyStatus");
-
-copyBtn.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(email);
-    copyStatus.textContent = "Copied ✅";
-    setTimeout(() => (copyStatus.textContent = ""), 1500);
-  } catch {
-    copyStatus.textContent = "Copy blocked by browser.";
-    setTimeout(() => (copyStatus.textContent = ""), 2000);
+// ===== Copy helpers (Email + Phone) =====
+function copyText(text, statusEl) {
+  if (!statusEl) return;
+  if (!text) {
+    statusEl.textContent = "Nothing to copy.";
+    setTimeout(() => (statusEl.textContent = ""), 1500);
+    return;
   }
-});
 
-// Gallery search/filter
+  navigator.clipboard.writeText(text).then(() => {
+    statusEl.textContent = "Copied ✅";
+    setTimeout(() => (statusEl.textContent = ""), 1500);
+  }).catch(() => {
+    statusEl.textContent = "Copy blocked by browser.";
+    setTimeout(() => (statusEl.textContent = ""), 2000);
+  });
+}
+
+// If you're using the NEW contact layout:
+const emailText = document.getElementById("emailText");          // <a id="emailText">...</a>
+const phoneText = document.getElementById("phoneText");          // <a id="phoneText">...</a>
+const copyEmailBtn = document.getElementById("copyEmailBtn");    // <button id="copyEmailBtn">
+const copyPhoneBtn = document.getElementById("copyPhoneBtn");    // <button id="copyPhoneBtn">
+const copyEmailStatus = document.getElementById("copyEmailStatus");
+const copyPhoneStatus = document.getElementById("copyPhoneStatus");
+
+if (copyEmailBtn && emailText) {
+  copyEmailBtn.addEventListener("click", () => {
+    copyText(emailText.textContent.trim(), copyEmailStatus);
+  });
+}
+
+if (copyPhoneBtn && phoneText) {
+  copyPhoneBtn.addEventListener("click", () => {
+    copyText(phoneText.textContent.trim(), copyPhoneStatus);
+  });
+}
+
+// Backward compatibility (if your HTML still has old IDs: copyBtn/copyStatus)
+const legacyCopyBtn = document.getElementById("copyBtn");
+const legacyCopyStatus = document.getElementById("copyStatus");
+if (legacyCopyBtn && legacyCopyStatus) {
+  const legacyEmail = (emailText?.textContent || "").trim() || "ryry112002@gmail.com";
+  legacyCopyBtn.addEventListener("click", () => copyText(legacyEmail, legacyCopyStatus));
+}
+
+// ===== Gallery search/filter =====
+// Works even if you have multiple gallery sections; it filters all .tile elements
 const search = document.getElementById("search");
 const tiles = Array.from(document.querySelectorAll(".tile"));
 
 if (search) {
   search.addEventListener("input", () => {
     const q = search.value.trim().toLowerCase();
+
     tiles.forEach((tile) => {
       const tags = (tile.getAttribute("data-tags") || "").toLowerCase();
       const caption = (tile.textContent || "").toLowerCase();
