@@ -140,21 +140,43 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section alt">
-      <div class="section-inner">
-        <h2>Contact us</h2>
+  <section id="contact" class="section alt">
+  <div class="section-inner">
+    <h2>Contact us</h2>
+    <p class="muted">Send a sweet note for baby girl 💌</p>
+
+    <div class="contact-cards">
+
+      <div class="card">
+        <h3>Email</h3>
         <p class="muted">
-          Want to send a message or a sweet note for baby girl? 💌
+          <a id="emailText" href="mailto:ryry112002@gmail.com">ryry112002@gmail.com</a>
         </p>
 
-        <div class="contact-box">
-          <!-- Replace with your email -->
-          <a class="btn primary" href="mailto:ryry112002@gmail.com">Email us</a>
-          <button class="btn" id="copyBtn">Copy email</button>
-          <span id="copyStatus" class="muted"></span>
+        <div class="contact-actions">
+          <button class="btn" id="copyEmailBtn" type="button">Copy email</button>
+          <span id="copyEmailStatus" class="muted"></span>
         </div>
       </div>
-    </section>
+
+      <div class="card">
+        <h3>Phone</h3>
+        <p class="muted">
+          <a id="phoneText" href="tel:+63XXXXXXXXXX">+63 9059618739</a>
+        </p>
+
+        <div class="contact-actions">
+          <button class="btn" id="copyPhoneBtn" type="button">Copy number</button>
+          <span id="copyPhoneStatus" class="muted"></span>
+        </div>
+
+        <p class="muted small">Tip: tap the number on mobile to call.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <footer class="footer">
       <span>© <span id="year"></span> Our Little Sunshine</span>
