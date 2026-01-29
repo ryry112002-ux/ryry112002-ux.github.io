@@ -61,7 +61,7 @@ a:hover{ text-decoration: underline; }
 
 .hero{
   display:grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: 1fr;
   gap: 16px;
   padding: 20px 0 8px;
 }
