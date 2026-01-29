@@ -252,7 +252,7 @@ p{ margin: 0; }
   display: block;
   background: #000;
   max-height: 520px;
-  object-fit: cover; /* cinematic; use 'contain' if you don't want cropping */
+  object-fit: contain; /* cinematic; use 'contain' if you don't want cropping */
   border-bottom: 1px solid var(--border);
 }
 
