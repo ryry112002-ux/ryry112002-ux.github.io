@@ -338,6 +338,39 @@ p{ margin: 0; }
 }
 
 /* Contact */
+/* Contact cards (Email + Phone) */
+.contact-cards{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.contact-actions{
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Make links look clean */
+#contact a{
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#contact a:hover{
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 760px){
+  .contact-cards{
+    grid-template-columns: 1fr;
+  }
+}
 .contact-box{
   margin-top: 12px;
   display:flex;
