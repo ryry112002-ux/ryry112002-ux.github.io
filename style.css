@@ -99,7 +99,7 @@ body{
   box-shadow: var(--shadow);
   background:
     linear-gradient(180deg, rgba(255,255,255,0.22), transparent 45%),
-    url("media/hero.jpg") center / cover no-repeat;
+    url("media/hero.png") center / cover no-repeat;
 }
 
 /* The soft panel that sits under the image */
