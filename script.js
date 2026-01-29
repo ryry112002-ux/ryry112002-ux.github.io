@@ -21,7 +21,7 @@ function updateThemeIcon() {
 }
 
 // Copy email button
-const email = "yourfamily@email.com"; // <-- change this
+const email = "ryry112002@mail.com"; // <-- change this
 const copyBtn = document.getElementById("copyBtn");
 const copyStatus = document.getElementById("copyStatus");
 
