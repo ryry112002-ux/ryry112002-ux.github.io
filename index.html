@@ -3,108 +3,185 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Our Little Sunshine — personal website" />
-  <title>Our Little Sunshine</title>
+  <meta name="description" content="A minimalist baby journey website for our upcoming baby girl." />
+  <title>Our Little Sunshine — Baby Girl Journey</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="header">
-    <a class="logo" href="#top">Our Little Sunshine</a>
-    <nav class="nav">
+  <!-- Top Nav -->
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Go to Home">Our Little Sunshine</a>
+
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#home">Home</a>
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <button id="themeBtn" class="theme-btn" aria-label="Toggle theme">🌙</button>
+      <a href="#videos">Videos</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact us</a>
     </nav>
+
+    <button id="themeBtn" class="theme-btn" aria-label="Toggle theme">☾</button>
   </header>
 
-  <main id="top" class="container">
+  <!-- HERO -->
+  <main id="home">
     <section class="hero">
-      <div class="hero-text">
-        <h1><span class="accent">A Little Life, A Big Love</span> ☀️</h1>
-        <p class="subtitle">
-          Welcome to my personal website — a place for my projects, interests, and updates.
+      <!-- Replace hero.jpg with your own image file inside /media -->
+      <div class="hero-image" role="img" aria-label="Hero image"></div>
+
+      <div class="hero-panel">
+        <p class="kicker">Baby Girl • Coming Soon</p>
+        <h1 class="headline">A Little Life, A Big Love</h1>
+        <p class="subhead">
+          A minimalist space to celebrate milestones, tiny moments, and the sweetest journey
+          as we welcome our baby girl. 🌸
         </p>
 
         <div class="hero-actions">
-          <a class="btn primary" href="#projects">See my projects</a>
-          <a class="btn" href="#contact">Contact me</a>
+          <a class="btn primary" href="#gallery">View gallery</a>
+          <a class="btn" href="#videos">Watch videos</a>
         </div>
 
-        <div class="socials">
-          <a href="https://github.com/ryry112002-ux" target="_blank" rel="noreferrer">GitHub</a>
+        <div class="mini-note">
+          <span class="dot"></span>
+          <span>Gender reveal done — it’s a girl 💗</span>
         </div>
       </div>
-
-     
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="section">
-      <h2>About</h2>
-      <p>
-        Add your intro here. Example: I’m a student and maker who enjoys building websites,
-        electronics, and capstone projects.
-      </p>
-    </section>
+      <div class="section-inner">
+        <h2>About</h2>
+        <p>
+          This website is a love letter in progress — a small corner of the internet where we’ll
+          keep memories as our baby girl grows: the kicks, the cravings, the laughter, the firsts.
+          Simple. Soft. Forever.
+        </p>
 
-    <section id="projects" class="section">
-      <h2>Projects</h2>
-      <p class="muted">Replace these cards with your real projects (capstone, dashboards, etc.).</p>
+        <div class="about-cards">
+          <div class="card">
+            <h3>What you’ll find</h3>
+            <ul>
+              <li>Milestone photos & tiny moments</li>
+              <li>Short clips & video memories</li>
+              <li>Notes we’ll read again someday</li>
+            </ul>
+          </div>
 
-      <div class="grid">
-        <article class="card">
-          <h3>Project 1</h3>
-          <p>Short description of what it is.</p>
-          <div class="tags">
-            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          <div class="card">
+            <h3>Our theme</h3>
+            <p class="muted">
+              Minimalist, warm, and gentle — baby pink tones, airy spacing, and a calm layout
+              so the memories feel like a scrapbook.
+            </p>
           </div>
-          <div class="card-actions">
-            <a class="link" href="#" target="_blank" rel="noreferrer">Demo</a>
-            <a class="link" href="#" target="_blank" rel="noreferrer">Source</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Project 2</h3>
-          <p>Short description of what it is.</p>
-          <div class="tags">
-            <span>ESP32</span><span>IoT</span><span>LoRa</span>
-          </div>
-          <div class="card-actions">
-            <a class="link" href="#" target="_blank" rel="noreferrer">Demo</a>
-            <a class="link" href="#" target="_blank" rel="noreferrer">Source</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Project 3</h3>
-          <p>Short description of what it is.</p>
-          <div class="tags">
-            <span>Dashboard</span><span>UI</span><span>Web</span>
-          </div>
-          <div class="card-actions">
-            <a class="link" href="#" target="_blank" rel="noreferrer">Demo</a>
-            <a class="link" href="#" target="_blank" rel="noreferrer">Source</a>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p class="muted">Add your email below (or remove the email buttons if you want).</p>
+    <!-- VIDEOS -->
+    <section id="videos" class="section alt">
+      <div class="section-inner">
+        <h2>Videos</h2>
+        <p class="muted">
+          Add short clips here (best as YouTube “Unlisted” embeds or small MP4 files).
+        </p>
 
-      <div class="contact-box">
-        <a class="btn primary" href="mailto:yourname@email.com">Email me</a>
-        <button class="btn" id="copyBtn">Copy email</button>
-        <span id="copyStatus" class="muted"></span>
+        <div class="video-grid">
+          <!-- Option A: YouTube/Vimeo embed (recommended) -->
+          <div class="video-card">
+            <div class="video-frame">
+              <!-- Replace VIDEO_ID with your YouTube video id -->
+              <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID"
+                title="Baby Journey Video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-meta">
+              <h3>Gender Reveal Moment</h3>
+              <p class="muted">A tiny peek into the day we found out she’s a girl 💗</p>
+            </div>
+          </div>
+
+          <!-- Option B: another embed placeholder -->
+          <div class="video-card">
+            <div class="video-frame placeholder">
+              <span>Drop another video here</span>
+            </div>
+            <div class="video-meta">
+              <h3>Coming soon</h3>
+              <p class="muted">Ultrasound day, baby kicks, or any special moment.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <div class="section-inner">
+        <div class="gallery-head">
+          <h2>Gallery</h2>
+          <div class="gallery-controls">
+            <input id="search" class="search" type="search" placeholder="Search (e.g., ultrasound, reveal, month 5)" />
+          </div>
+        </div>
+
+        <div id="galleryGrid" class="gallery-grid">
+          <!-- Replace image filenames with your own uploaded photos in /media -->
+          <figure class="tile" data-tags="ultrasound month1">
+            <img src="media/photo1.jpg" alt="Ultrasound photo" loading="lazy" />
+            <figcaption>Ultrasound day ✨</figcaption>
+          </figure>
+
+          <figure class="tile" data-tags="reveal family celebration">
+            <img src="media/photo2.jpg" alt="Gender reveal celebration" loading="lazy" />
+            <figcaption>Gender reveal 💗</figcaption>
+          </figure>
+
+          <figure class="tile" data-tags="mom belly month5">
+            <img src="media/photo3.jpg" alt="Baby bump photo" loading="lazy" />
+            <figcaption>Growing gently 🌸</figcaption>
+          </figure>
+
+          <figure class="tile" data-tags="family candid">
+            <img src="media/photo4.jpg" alt="Family moment" loading="lazy" />
+            <figcaption>Little moments</figcaption>
+          </figure>
+        </div>
+
+        <p class="muted small">
+          Tip: Upload photos into the <b>media/</b> folder and update the filenames above.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section alt">
+      <div class="section-inner">
+        <h2>Contact us</h2>
+        <p class="muted">
+          Want to send a message or a sweet note for baby girl? 💌
+        </p>
+
+        <div class="contact-box">
+          <!-- Replace with your email -->
+          <a class="btn primary" href="mailto:yourfamily@email.com">Email us</a>
+          <button class="btn" id="copyBtn">Copy email</button>
+          <span id="copyStatus" class="muted"></span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Our Little Sunshine</span>
+    </footer>
   </main>
-
-  <footer class="footer">
-    <span>© <span id="year"></span> Our Little Sunshine</span>
-  </footer>
 
   <script src="script.js"></script>
 </body>
