@@ -11,7 +11,7 @@
   --radius: 18px;
 }
 
-/* Dark mode (optional) */
+/* Dark mode (toggle adds .dark on :root) */
 :root.dark{
   --bg: #0f1020;
   --paper: rgba(255,255,255,0.06);
@@ -24,6 +24,7 @@
 
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
+
 body{
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -35,6 +36,8 @@ body{
     var(--bg);
 }
 
+a{ color: inherit; }
+
 /* Top bar */
 .topbar{
   position: sticky;
@@ -43,6 +46,7 @@ body{
   display:flex;
   align-items:center;
   justify-content: space-between;
+  gap: 12px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg) 70%, transparent);
@@ -92,6 +96,7 @@ body{
   gap: 14px;
 }
 
+/* Uses your inline background-image too, but this is the clean default */
 .hero-image{
   height: clamp(220px, 42vw, 420px);
   border-radius: calc(var(--radius) + 6px);
@@ -99,11 +104,9 @@ body{
   box-shadow: var(--shadow);
   background:
     linear-gradient(180deg, rgba(255,255,255,0.22), transparent 45%),
-    url("hero.png")
-") center / cover no-repeat;
+    url("hero.png") center / cover no-repeat;
 }
 
-/* The soft panel that sits under the image */
 .hero-panel{
   border: 1px solid var(--border);
   background: var(--paper);
@@ -153,6 +156,7 @@ body{
   text-decoration: none;
   font-weight: 650;
   cursor: pointer;
+  transition: transform 120ms ease;
 }
 
 .btn.primary{
@@ -160,9 +164,7 @@ body{
   border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 
-.btn:hover{
-  transform: translateY(-1px);
-}
+.btn:hover{ transform: translateY(-1px); }
 
 .mini-note{
   margin-top: 14px;
@@ -203,9 +205,7 @@ h2{
   letter-spacing: -0.01em;
 }
 
-p{
-  margin: 0;
-}
+p{ margin: 0; }
 
 .muted{ color: var(--muted); }
 .small{ font-size: 13px; margin-top: 14px; }
@@ -245,34 +245,30 @@ p{
   box-shadow: var(--shadow);
 }
 
-.video-frame{
-  position: relative;
+/* ✅ MP4 video element sizing (prevents huge poster) */
+.video-card video{
   width: 100%;
-  padding-top: 56.25%;
-  background: color-mix(in srgb, var(--paper2) 60%, transparent);
-}
-
-.video-frame iframe{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.video-frame.placeholder{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  height: auto;
+  display: block;
+  background: #000;
+  max-height: 520px;
+  object-fit: cover; /* cinematic; use 'contain' if you don't want cropping */
+  border-bottom: 1px solid var(--border);
 }
 
 .video-meta{
-  padding: 12px 14px 14px;
+  padding: 14px 16px 18px;
 }
 
-.video-meta h3{ margin: 0 0 6px; }
+.video-meta h3{
+  margin: 0 0 6px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.video-meta p{
+  line-height: 1.7;
+}
 
 /* Gallery */
 .gallery-head{
@@ -343,7 +339,7 @@ p{
 }
 
 @media (max-width: 760px){
-  .nav{ display:none; } /* keep it minimal on mobile (can add hamburger later) */
+  .nav{ display:none; } /* minimalist on mobile */
   .about-cards{ grid-template-columns: 1fr; }
   .video-grid{ grid-template-columns: 1fr; }
 }
