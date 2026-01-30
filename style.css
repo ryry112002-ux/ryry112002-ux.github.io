@@ -11,7 +11,7 @@
   --radius: 18px;
 
   /* ✅ Fix anchor jumps under sticky header */
-  scroll-padding-top: 86px;
+  scroll-padding-top: 110px;
 }
 
 /* Dark mode (toggle adds .dark on :root) */
