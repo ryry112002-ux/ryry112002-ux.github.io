@@ -405,6 +405,12 @@ h2{
   font-size: 18px;
   line-height: 1;
 }
+.mini-btn{
+  pointer-events: auto;
+}
+.mini-track{
+  pointer-events: none;  /* ensures buttons always receive clicks */
+}
 
 .mini-btn.prev{ left: 8px; }
 .mini-btn.next{ right: 8px; }
