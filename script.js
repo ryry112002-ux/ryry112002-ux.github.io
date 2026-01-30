@@ -26,12 +26,14 @@ if (themeBtn) {
 // ===== Copy helpers (Email + Phone) =====
 function copyText(text, statusEl) {
   if (!statusEl) return;
+
   if (!text) {
     statusEl.textContent = "Nothing to copy.";
     setTimeout(() => (statusEl.textContent = ""), 1500);
     return;
   }
 
+  // Clipboard works on HTTPS (GitHub Pages is HTTPS)
   navigator.clipboard.writeText(text).then(() => {
     statusEl.textContent = "Copied ✅";
     setTimeout(() => (statusEl.textContent = ""), 1500);
@@ -41,11 +43,10 @@ function copyText(text, statusEl) {
   });
 }
 
-// If you're using the NEW contact layout:
-const emailText = document.getElementById("emailText");          // <a id="emailText">...</a>
-const phoneText = document.getElementById("phoneText");          // <a id="phoneText">...</a>
-const copyEmailBtn = document.getElementById("copyEmailBtn");    // <button id="copyEmailBtn">
-const copyPhoneBtn = document.getElementById("copyPhoneBtn");    // <button id="copyPhoneBtn">
+const emailText = document.getElementById("emailText");
+const phoneText = document.getElementById("phoneText");
+const copyEmailBtn = document.getElementById("copyEmailBtn");
+const copyPhoneBtn = document.getElementById("copyPhoneBtn");
 const copyEmailStatus = document.getElementById("copyEmailStatus");
 const copyPhoneStatus = document.getElementById("copyPhoneStatus");
 
@@ -61,23 +62,13 @@ if (copyPhoneBtn && phoneText) {
   });
 }
 
-// Backward compatibility (if your HTML still has old IDs: copyBtn/copyStatus)
-const legacyCopyBtn = document.getElementById("copyBtn");
-const legacyCopyStatus = document.getElementById("copyStatus");
-if (legacyCopyBtn && legacyCopyStatus) {
-  const legacyEmail = (emailText?.textContent || "").trim() || "ryry112002@gmail.com";
-  legacyCopyBtn.addEventListener("click", () => copyText(legacyEmail, legacyCopyStatus));
-}
-
 // ===== Gallery search/filter =====
-// Works even if you have multiple gallery sections; it filters all .tile elements
 const search = document.getElementById("search");
 const tiles = Array.from(document.querySelectorAll(".tile"));
 
 if (search) {
   search.addEventListener("input", () => {
     const q = search.value.trim().toLowerCase();
-
     tiles.forEach((tile) => {
       const tags = (tile.getAttribute("data-tags") || "").toLowerCase();
       const caption = (tile.textContent || "").toLowerCase();
@@ -86,104 +77,112 @@ if (search) {
     });
   });
 }
+
 // ===== Active navigation on scroll =====
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav a");
-
-function setActiveNav() {
-  let current = "";
-
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 140; // offset for sticky header
-    if (window.scrollY >= sectionTop) {
-      current = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
-      link.classList.add("active");
-    }
-  });
-}
-
-window.addEventListener("scroll", setActiveNav);
-window.addEventListener("load", setActiveNav);
-// ===== Mini gallery sliders (inside grid tiles) =====
 (function () {
-  const sliders = document.querySelectorAll(".mini-slider");
+  const navLinks = document.querySelectorAll(".nav a");
+  const ids = ["home", "about", "videos", "gallery", "contact"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
 
-  sliders.forEach((slider) => {
+  function setActiveNav() {
+    let current = "home";
+    const y = window.scrollY;
+
+    ids.forEach((el) => {
+      const top = el.offsetTop - 160; // sticky header + breathing room
+      if (y >= top) current = el.id;
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+    });
+  }
+
+  window.addEventListener("scroll", setActiveNav);
+  window.addEventListener("load", setActiveNav);
+})();
+
+// ===== Mini gallery sliders (autoplay + buttons + swipe) =====
+(function () {
+  document.querySelectorAll(".mini-slider").forEach((slider) => {
     const track = slider.querySelector(".mini-track");
     const slides = Array.from(track?.querySelectorAll("img") || []);
-    if (!track || slides.length === 0) return;
+    if (!track || slides.length <= 1) return;
+
+    const prevBtn = slider.querySelector(".mini-btn.prev");
+    const nextBtn = slider.querySelector(".mini-btn.next");
 
     let index = 0;
     let timer = null;
-    let startX = 0;
-    let dragging = false;
 
     const autoplay = slider.dataset.autoplay === "true";
-    const interval = Math.max(1200, parseInt(slider.dataset.interval || "2500", 10));
+    const interval = Math.max(1500, parseInt(slider.dataset.interval || "2500", 10));
 
     function update() {
       track.style.transform = `translateX(${-index * 100}%)`;
     }
 
-    function next() {
-      index = (index + 1) % slides.length;
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
       update();
     }
 
-    function prev() {
-      index = (index - 1 + slides.length) % slides.length;
-      update();
-    }
-
-    function startAutoplay() {
-      if (!autoplay || slides.length <= 1) return;
-      stopAutoplay();
-      timer = setInterval(next, interval);
-    }
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
 
     function stopAutoplay() {
       if (timer) clearInterval(timer);
       timer = null;
     }
 
-    // Pause on hover (desktop)
-    slider.addEventListener("mouseenter", stopAutoplay);
-    slider.addEventListener("mouseleave", startAutoplay);
+    function startAutoplay() {
+      if (!autoplay) return;
+      stopAutoplay();
+      timer = setInterval(() => {
+        next(); // consistent direction
+      }, interval);
+    }
 
-    // Swipe (mobile/trackpad)
+    // Buttons (manual)
+    if (nextBtn) nextBtn.addEventListener("click", () => { stopAutoplay(); next(); startAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener("click", () => { stopAutoplay(); prev(); startAutoplay(); });
+
+    // Swipe
+    let startX = 0;
+    let dragging = false;
+
     slider.addEventListener("pointerdown", (e) => {
       dragging = true;
       startX = e.clientX;
       stopAutoplay();
+      slider.setPointerCapture?.(e.pointerId);
     });
 
     slider.addEventListener("pointerup", (e) => {
       if (!dragging) return;
       dragging = false;
-      const dx = e.clientX - startX;
 
+      const dx = e.clientX - startX;
       if (Math.abs(dx) > 35) {
         dx < 0 ? next() : prev();
       }
 
       startAutoplay();
+      slider.releasePointerCapture?.(e.pointerId);
     });
 
-    slider.addEventListener("pointerleave", () => {
+    slider.addEventListener("pointercancel", () => {
       dragging = false;
       startAutoplay();
     });
 
+    // Pause on hover (desktop)
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+
     // Init
-    update();
+    goTo(0);
     startAutoplay();
   });
 })();
-
-
