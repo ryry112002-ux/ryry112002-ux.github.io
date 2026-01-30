@@ -104,14 +104,19 @@ if (search) {
 })();
 
 // ===== Mini gallery sliders (autoplay + buttons + swipe) =====
+// ===== Mini gallery sliders (autoplay + buttons + swipe) — BULLETPROOF =====
 (function () {
-  document.querySelectorAll(".mini-slider").forEach((slider) => {
-    const track = slider.querySelector(".mini-track");
-    const slides = Array.from(track?.querySelectorAll("img") || []);
-    if (!track || slides.length <= 1) return;
+  const sliders = document.querySelectorAll(".mini-slider");
 
-    const prevBtn = slider.querySelector(".mini-btn.prev");
-    const nextBtn = slider.querySelector(".mini-btn.next");
+  sliders.forEach((slider) => {
+    const track = slider.querySelector(".mini-track");
+    if (!track) return;
+
+    const slides = Array.from(track.querySelectorAll("img"));
+    if (slides.length <= 1) return;
+
+    const prevBtn = slider.querySelector("button.prev");
+    const nextBtn = slider.querySelector("button.next");
 
     let index = 0;
     let timer = null;
@@ -139,16 +144,31 @@ if (search) {
     function startAutoplay() {
       if (!autoplay) return;
       stopAutoplay();
-      timer = setInterval(() => {
-        next(); // consistent direction
-      }, interval);
+      timer = setInterval(next, interval);
     }
 
-    // Buttons (manual)
-    if (nextBtn) nextBtn.addEventListener("click", () => { stopAutoplay(); next(); startAutoplay(); });
-    if (prevBtn) prevBtn.addEventListener("click", () => { stopAutoplay(); prev(); startAutoplay(); });
+    // ✅ CLICK HANDLERS
+    if (nextBtn) {
+      nextBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        stopAutoplay();
+        next();
+        startAutoplay();
+      });
+    }
 
-    // Swipe
+    if (prevBtn) {
+      prevBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        stopAutoplay();
+        prev();
+        startAutoplay();
+      });
+    }
+
+    // ✅ SWIPE
     let startX = 0;
     let dragging = false;
 
@@ -177,7 +197,7 @@ if (search) {
       startAutoplay();
     });
 
-    // Pause on hover (desktop)
+    // ✅ Pause on hover
     slider.addEventListener("mouseenter", stopAutoplay);
     slider.addEventListener("mouseleave", startAutoplay);
 
@@ -186,3 +206,4 @@ if (search) {
     startAutoplay();
   });
 })();
+
