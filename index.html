@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A minimalist baby journey website for our upcoming baby girl." />
+  <meta name="description" content="A baby journey website for our upcoming baby girl." />
   <title>Our Little Sunshine — Baby Girl Journey</title>
- <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=9" />
 </head>
 
 <body>
@@ -27,17 +27,15 @@
   <!-- HERO -->
   <main id="home">
     <section class="hero">
-      <!-- Replace hero.jpg with your own image file inside /media -->
-    <div class="hero-image" role="img" aria-label="Hero image"
-     style="background-image:url('hero.png'); background-size:cover; background-position:center;">
-</div>
-
+      <div class="hero-image" role="img" aria-label="Hero image"
+        style="background-image:url('hero.png'); background-size:cover; background-position:center;">
+      </div>
 
       <div class="hero-panel">
         <p class="kicker">Baby Girl • Coming Soon</p>
         <h1 class="headline">A Little Life, A Big Love</h1>
         <p class="subhead">
-          A minimalist space to celebrate milestones, tiny moments, and the sweetest journey
+          A soft little space to celebrate milestones, tiny moments, and the sweetest journey
           as we welcome our baby girl. 🌸
         </p>
 
@@ -57,7 +55,7 @@
     <section id="about" class="section">
       <div class="section-inner">
         <h2>About</h2>
-        <p>
+        <p class="lead">
           This website is a love letter in progress — a small corner of the internet where we’ll
           keep memories as our baby girl grows: the kicks, the cravings, the laughter, the firsts.
           Simple. Soft. Forever.
@@ -85,135 +83,154 @@
     </section>
 
     <!-- VIDEOS -->
- <section id="videos" class="section alt">
-<div class="video-card">
-  <div class="video-wrap">
-    <video controls preload="metadata" playsinline
-      poster="media/poster-gender-reveal.png">
-      <source src="media/gender-reveal.mp4.mp4" type="video/mp4">
-    </video>
-  </div>
+    <section id="videos" class="section alt">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Videos</h2>
+          <p class="muted">Little moving moments we’ll keep forever 🎥</p>
+        </div>
 
-  <div class="video-meta">
-    <h3>December 24 — Gender Reveal</h3>
-    <p class="muted">A magical night of surprise, happy tears, and love — it’s a girl. 💗</p>
-  </div>
-</div>
+        <div class="video-grid">
+          <div class="video-card">
+            <div class="video-wrap">
+              <video controls preload="metadata" playsinline poster="media/poster-gender-reveal.png">
+                <!-- NOTE: Keep your real filename here -->
+                <source src="media/gender-reveal.mp4.mp4" type="video/mp4">
+              </video>
+            </div>
 
+            <div class="video-meta">
+              <h3>December 24 — Gender Reveal</h3>
+              <p class="muted">A magical night of surprise, happy tears, and love — it’s a girl. 💗</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- GALLERY -->
     <section id="gallery" class="section">
       <div class="section-inner">
         <div class="gallery-head">
-          <h2>Gallery</h2>
+          <div>
+            <h2>Gallery</h2>
+            <p class="muted">Tap arrows or swipe to browse photos inside each memory.</p>
+          </div>
+
           <div class="gallery-controls">
-            </div>
+            <!-- Optional search (your JS supports it) -->
+            <input id="search" class="search" type="search" placeholder="Search (ultrasound, reveal, bump, family)" />
+          </div>
         </div>
 
         <div id="galleryGrid" class="gallery-grid">
-          <!-- Replace image filenames with your own uploaded photos in /media -->
+
           <figure class="tile" data-tags="ultrasound month">
-           <!-- SLIDER START -->
-  <div class="mini-slider" data-autoplay="true" data-interval="2500">
-    <div class="mini-track">
-      <img src="media/ultrasound.jpg" alt="Ultrasound 1" loading="lazy">
-      <img src="media/ultrasound1.jpg" alt="Ultrasound 2" loading="lazy">
-    </div>
-  </div>
-  <!-- SLIDER END -->
+            <div class="mini-slider" data-autoplay="true" data-interval="2800">
+              <button class="mini-btn prev" type="button" aria-label="Previous photo">‹</button>
+              <button class="mini-btn next" type="button" aria-label="Next photo">›</button>
+
+              <div class="mini-track">
+                <img src="media/ultrasound.jpg" alt="Ultrasound 1" loading="lazy">
+                <img src="media/ultrasound1.jpg" alt="Ultrasound 2" loading="lazy">
+              </div>
+            </div>
             <figcaption>Ultrasound Day ✨</figcaption>
           </figure>
 
           <figure class="tile" data-tags="reveal family celebration">
-            <div class="mini-slider" data-autoplay="true" data-interval="2500">
-    <div class="mini-track">
-      <img src="media/genderreveal1.jpg" loading="lazy">
-      <img src="media/genderreveal2.jpg" loading="lazy">
-      <img src="media/genderreveal3.jpg" loading="lazy">
-      <img src="media/genderreveal4.jpg" loading="lazy">
-      <img src="media/genderreveal5.jpg" loading="lazy">
-      <img src="media/genderreveal6.jpg" loading="lazy">
-      <img src="media/genderreveal7.jpg" loading="lazy">
-      <img src="media/genderreveal8.jpg" loading="lazy">
-      <img src="media/genderreveal9.jpg" loading="lazy">
-      <img src="media/genderreveal10.jpg" loading="lazy">
-      <img src="media/genderreveal11.jpg" loading="lazy">
-      <img src="media/genderreveal12.jpg" loading="lazy">
-    </div>
-  </div>
+            <div class="mini-slider" data-autoplay="true" data-interval="2400">
+              <button class="mini-btn prev" type="button" aria-label="Previous photo">‹</button>
+              <button class="mini-btn next" type="button" aria-label="Next photo">›</button>
+
+              <div class="mini-track">
+                <img src="media/genderreveal1.jpg" alt="Gender reveal 1" loading="lazy">
+                <img src="media/genderreveal2.jpg" alt="Gender reveal 2" loading="lazy">
+                <img src="media/genderreveal3.jpg" alt="Gender reveal 3" loading="lazy">
+                <img src="media/genderreveal4.jpg" alt="Gender reveal 4" loading="lazy">
+                <img src="media/genderreveal5.jpg" alt="Gender reveal 5" loading="lazy">
+                <img src="media/genderreveal6.jpg" alt="Gender reveal 6" loading="lazy">
+                <img src="media/genderreveal7.jpg" alt="Gender reveal 7" loading="lazy">
+                <img src="media/genderreveal8.jpg" alt="Gender reveal 8" loading="lazy">
+                <img src="media/genderreveal9.jpg" alt="Gender reveal 9" loading="lazy">
+                <img src="media/genderreveal10.jpg" alt="Gender reveal 10" loading="lazy">
+                <img src="media/genderreveal11.jpg" alt="Gender reveal 11" loading="lazy">
+                <img src="media/genderreveal12.jpg" alt="Gender reveal 12" loading="lazy">
+              </div>
+            </div>
             <figcaption>Gender reveal 💗</figcaption>
           </figure>
 
-          <figure class="tile" data-tags="mom belly month">
-            <div class="mini-slider" data-autoplay="true" data-interval="2500">
-    <div class="mini-track">
-      <img src="media/bump1.jpg" loading="lazy">
-      <img src="media/bump2.jpg" loading="lazy">
-      <img src="media/bump3.jpg" loading="lazy">
-      <img src="media/bump4.jpg" loading="lazy">
-      <img src="media/bump5.jpg" loading="lazy">
-      <img src="media/bump6.jpg" loading="lazy">
-      <img src="media/bump7.jpg" loading="lazy">
-    </div>
-  </div>
+          <figure class="tile" data-tags="mom belly bump month">
+            <div class="mini-slider" data-autoplay="true" data-interval="2600">
+              <button class="mini-btn prev" type="button" aria-label="Previous photo">‹</button>
+              <button class="mini-btn next" type="button" aria-label="Next photo">›</button>
+
+              <div class="mini-track">
+                <img src="media/bump1.jpg" alt="Bump 1" loading="lazy">
+                <img src="media/bump2.jpg" alt="Bump 2" loading="lazy">
+                <img src="media/bump3.jpg" alt="Bump 3" loading="lazy">
+                <img src="media/bump4.jpg" alt="Bump 4" loading="lazy">
+                <img src="media/bump5.jpg" alt="Bump 5" loading="lazy">
+                <img src="media/bump6.jpg" alt="Bump 6" loading="lazy">
+                <img src="media/bump7.jpg" alt="Bump 7" loading="lazy">
+              </div>
+            </div>
             <figcaption>Growing gently 🌸</figcaption>
           </figure>
 
-          <figure class="tile" data-tags="family candid">
-             <div class="mini-slider" data-autoplay="true" data-interval="2500">
-    <div class="mini-track">
-      <img src="media/fam1.jpg" alt="Ultrasound 1" loading="lazy">
-      <img src="media/fam2.jpg" alt="Ultrasound 2" loading="lazy">
-    </div>
-  </div>
+          <figure class="tile" data-tags="family candid little moments">
+            <div class="mini-slider" data-autoplay="true" data-interval="3000">
+              <button class="mini-btn prev" type="button" aria-label="Previous photo">‹</button>
+              <button class="mini-btn next" type="button" aria-label="Next photo">›</button>
+
+              <div class="mini-track">
+                <img src="media/fam1.jpg" alt="Family 1" loading="lazy">
+                <img src="media/fam2.jpg" alt="Family 2" loading="lazy">
+              </div>
+            </div>
             <figcaption>Little moments</figcaption>
           </figure>
-        </div>
 
-        <p class="muted small">
-        </p>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
- <section id="contact" class="section alt">
-  <div class="section-inner">
-    <h2>Contact us</h2>
-    <p class="muted">Tell us if you want to be a Godparent of our little sunshine.💌</p>
+    <section id="contact" class="section alt">
+      <div class="section-inner">
+        <h2>Contact us</h2>
+        <p class="muted">Tell us if you want to be a Godparent of our little sunshine 💌</p>
 
-    <div class="contact-cards">
+        <div class="contact-cards">
+          <div class="card">
+            <h3>Email</h3>
+            <p class="muted">
+              <a id="emailText" href="mailto:marcorichel22@gmail.com">marcorichel22@gmail.com</a>
+            </p>
 
-      <div class="card">
-        <h3>Email</h3>
+            <div class="contact-actions">
+              <button class="btn" id="copyEmailBtn" type="button">Copy email</button>
+              <span id="copyEmailStatus" class="muted"></span>
+            </div>
+          </div>
 
-        <p class="muted">
-          <a id="emailText" href="mailto:marcorichel22@gmail.com">marcorichel22@gmail.com</a>
-        </p>
+          <div class="card">
+            <h3>Phone</h3>
+            <p class="muted">
+              <a id="phoneText" href="tel:+639059618739">+63 905 961 8739</a>
+            </p>
 
-        <div class="contact-actions">
-          <button class="btn" id="copyEmailBtn" type="button">Copy email</button>
-          <span id="copyEmailStatus" class="muted"></span>
+            <div class="contact-actions">
+              <button class="btn" id="copyPhoneBtn" type="button">Copy number</button>
+              <span id="copyPhoneStatus" class="muted"></span>
+            </div>
+
+            <p class="muted small">Tip: tap the number on mobile to call.</p>
+          </div>
         </div>
       </div>
-
-      <div class="card">
-        <h3>Phone</h3>
-
-        <p class="muted">
-          <a id="phoneText" href="tel:+639059618739">+63 905 961 8739</a>
-        </p>
-
-        <div class="contact-actions">
-          <button class="btn" id="copyPhoneBtn" type="button">Copy number</button>
-          <span id="copyPhoneStatus" class="muted"></span>
-        </div>
-
-    
-    </div>
-  </div>
-</section>
-
-
+    </section>
 
     <footer class="footer">
       <span>© <span id="year"></span> Our Little Sunshine</span>
