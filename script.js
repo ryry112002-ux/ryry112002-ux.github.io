@@ -86,3 +86,28 @@ if (search) {
     });
   });
 }
+// ===== Active navigation on scroll =====
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav a");
+
+function setActiveNav() {
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 140; // offset for sticky header
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", setActiveNav);
+window.addEventListener("load", setActiveNav);
+
