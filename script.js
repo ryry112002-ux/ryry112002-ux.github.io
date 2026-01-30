@@ -1,3 +1,5 @@
+// script.js (full updated - cute + smooth theme + your existing features)
+
 // ===== Base =====
 const root = document.documentElement;
 
@@ -5,11 +7,17 @@ const root = document.documentElement;
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ===== Theme toggle =====
+// ===== Theme toggle (with first-visit system preference) =====
 const themeBtn = document.getElementById("themeBtn");
 if (themeBtn) {
   const savedTheme = localStorage.getItem("theme"); // "dark" or ""
-  if (savedTheme === "dark") root.classList.add("dark");
+  if (savedTheme === "dark") {
+    root.classList.add("dark");
+  } else if (!savedTheme) {
+    // Optional: match system theme on first visit
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDark) root.classList.add("dark");
+  }
   updateThemeIcon();
 
   themeBtn.addEventListener("click", () => {
@@ -103,7 +111,6 @@ if (search) {
   window.addEventListener("load", setActiveNav);
 })();
 
-// ===== Mini gallery sliders (autoplay + buttons + swipe) =====
 // ===== Mini gallery sliders (autoplay + buttons + swipe) — BULLETPROOF =====
 (function () {
   const sliders = document.querySelectorAll(".mini-slider");
@@ -147,7 +154,7 @@ if (search) {
       timer = setInterval(next, interval);
     }
 
-    // ✅ CLICK HANDLERS
+    // CLICK HANDLERS
     if (nextBtn) {
       nextBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -168,7 +175,7 @@ if (search) {
       });
     }
 
-    // ✅ SWIPE
+    // SWIPE
     let startX = 0;
     let dragging = false;
 
@@ -197,7 +204,7 @@ if (search) {
       startAutoplay();
     });
 
-    // ✅ Pause on hover
+    // Pause on hover
     slider.addEventListener("mouseenter", stopAutoplay);
     slider.addEventListener("mouseleave", startAutoplay);
 
@@ -206,4 +213,3 @@ if (search) {
     startAutoplay();
   });
 })();
-
