@@ -110,4 +110,80 @@ function setActiveNav() {
 
 window.addEventListener("scroll", setActiveNav);
 window.addEventListener("load", setActiveNav);
+// ===== Mini gallery sliders (inside grid tiles) =====
+(function () {
+  const sliders = document.querySelectorAll(".mini-slider");
+
+  sliders.forEach((slider) => {
+    const track = slider.querySelector(".mini-track");
+    const slides = Array.from(track?.querySelectorAll("img") || []);
+    if (!track || slides.length === 0) return;
+
+    let index = 0;
+    let timer = null;
+    let startX = 0;
+    let dragging = false;
+
+    const autoplay = slider.dataset.autoplay === "true";
+    const interval = Math.max(1200, parseInt(slider.dataset.interval || "2500", 10));
+
+    function update() {
+      track.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    function next() {
+      index = (index + 1) % slides.length;
+      update();
+    }
+
+    function prev() {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    }
+
+    function startAutoplay() {
+      if (!autoplay || slides.length <= 1) return;
+      stopAutoplay();
+      timer = setInterval(next, interval);
+    }
+
+    function stopAutoplay() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    // Pause on hover (desktop)
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+
+    // Swipe (mobile/trackpad)
+    slider.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      startX = e.clientX;
+      stopAutoplay();
+    });
+
+    slider.addEventListener("pointerup", (e) => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = e.clientX - startX;
+
+      if (Math.abs(dx) > 35) {
+        dx < 0 ? next() : prev();
+      }
+
+      startAutoplay();
+    });
+
+    slider.addEventListener("pointerleave", () => {
+      dragging = false;
+      startAutoplay();
+    });
+
+    // Init
+    update();
+    startAutoplay();
+  });
+})();
+
 
